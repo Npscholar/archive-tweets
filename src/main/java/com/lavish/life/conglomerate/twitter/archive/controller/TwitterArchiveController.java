@@ -9,6 +9,8 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lavish.life.conglomerate.twitter.archive.model.User;
+
 @RestController
 public class TwitterArchiveController {
 	
@@ -18,11 +20,11 @@ public class TwitterArchiveController {
 	private final static String  URL = "https://api.twitter.com/1.1/users/show.json?screen_name=@blessed2breathe";
 	
 	@RequestMapping("/")
-	public ResponseEntity<String > homePage() {
+	public ResponseEntity<User > homePage() {
 		
 		HttpEntity<String> entity = new HttpEntity<String>(new HttpHeaders());
 		
-		return twitterRestTemplate.exchange(URL, HttpMethod.GET, entity , String.class);
+		return twitterRestTemplate.exchange(URL, HttpMethod.GET, entity , User.class);
 //		return "Hello Twitter";
 	}
 

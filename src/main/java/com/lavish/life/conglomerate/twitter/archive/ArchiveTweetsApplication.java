@@ -19,16 +19,14 @@ public class ArchiveTweetsApplication {
 	
 	@Value("${accessTokenUri}")
     private String accessTokenUri;
- 
-//    @Value("${userAuthorizationUri}")
-//    private String userAuthorizationUri;
- 
+
     @Value("${clientID}")
     private String clientID;
  
     @Value("${clientSecret}")
     private String clientSecret;
  
+    // type of oauth2 request it is i.e grant_type value amongst other changes 
     @Bean
     public OAuth2ProtectedResourceDetails twitter() {
     	ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
