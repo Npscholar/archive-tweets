@@ -17,7 +17,7 @@ import lombok.Data;
  */
 @Data
 public class UserMentions {
-	private int id;
+	private long id;
 	private String id_str;
 	private List<Integer> indices;
 	private String name;

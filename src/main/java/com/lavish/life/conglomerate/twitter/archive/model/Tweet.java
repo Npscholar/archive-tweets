@@ -2,7 +2,6 @@ package com.lavish.life.conglomerate.twitter.archive.model;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import lombok.Data;
 
@@ -22,20 +21,20 @@ import lombok.Data;
 public class Tweet {
 
 	private String created_at;
-	private int id;
+	private long id;
 	private String id_str;
 	private String text;
 	private String source;
 	private boolean truncated;
-	private int in_reply_to_status_id;
+	private long in_reply_to_status_id;
 	private String in_reply_to_status_id_str;
-	private int in_reply_to_user_id;
+	private long in_reply_to_user_id;
 	private String in_reply_to_user_str;
 	private String in_reply_to_screen_name;
 	private User user;
 	private Coordinates coordinates;
 	private Places place;
-	private int quoted_status_id;
+	private long quoted_status_id;
 	private String quoted_status_id_str;
 	private boolean is_quote_status;
 	// TODO is this the best way to handle tweets, retweets, and quoted tweets ?
@@ -52,7 +51,7 @@ public class Tweet {
 	private boolean possibly_sensitive;
 	private String filter_level;
 	private String lang;
-	private List <Objects> matching_rules;
+	private List <MatchingRule> matching_rules;
 	private CurrentUserRetweet current_user_retweet;
 	private Map<String, Object> scopes;
 	private boolean withheld_copyright;

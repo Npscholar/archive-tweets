@@ -23,7 +23,7 @@ import lombok.Data;
 public class Media {
 	private String display_url;
 	private String expanded_url;
-	private int id;
+	private long id;
 	private String id_str;
 	private List<Integer> indicies;
 	private String media_url;

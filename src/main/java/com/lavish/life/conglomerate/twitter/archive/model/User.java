@@ -18,7 +18,7 @@ import lombok.Data;
  */
 @Data
 public class User {
-	private int id;
+	private long id;
 	private String name;
 	private String screen_name;
 	private String location;
@@ -28,11 +28,11 @@ public class User {
 	@JsonProperty("protected")
 	private boolean isProtected;
 	private boolean verified;
-	private int followers_count;
-	private int friends_count;
-	private int listed_count;
-	private int favourites_count;
-	private int statuses_count;
+	private long followers_count;
+	private long friends_count;
+	private long listed_count;
+	private long favourites_count;
+	private long statuses_count;
 	private String created_at;
 	private Object utc_offset;
 	private Object time_zone;

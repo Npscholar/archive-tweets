@@ -17,7 +17,7 @@ import lombok.Data;
 
 @Data
 public class CurrentUserRetweet {
-	private int id;
+	private long id;
 	private String id_str;
 
 }
