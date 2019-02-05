@@ -3,6 +3,9 @@ package com.lavish.life.conglomerate.twitter.archive.model;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Data;
 
 /**
@@ -18,9 +21,11 @@ import lombok.Data;
  *
  */
 @Data
+@Document
 public class Tweet {
 
 	private String created_at;
+	@Id
 	private long id;
 	private String id_str;
 	private String text;

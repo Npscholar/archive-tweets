@@ -13,8 +13,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.lavish.life.conglomerate.twitter.archive.data.MongoRepo;
 import com.lavish.life.conglomerate.twitter.archive.model.Tweet;
 import com.lavish.life.conglomerate.twitter.archive.model.response.TwitterTweetsSearchAPIResponse;
+import com.mongodb.MongoBulkWriteException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,20 +27,28 @@ public class TwitterArchiveController {
 	@Autowired
 	private  OAuth2RestTemplate twitterRestTemplate;
 	
+	@Autowired	
+	private MongoRepo mongodb;
+	
 	private final static String  URL = "https://api.twitter.com/1.1/users/show.json?screen_name=@blessed2breathe";
 	private final String twitterAPIBaseURL = "https://api.twitter.com/1.1/";
 	private final String searchFullArchive = "tweets/search/fullarchive/prod.json";
-	private final String query = "query=from:blessed2breathe&fromDate=201001010000&toDate=201007310000";
+	private final String query = "query=from:blessed2breathe&fromDate=201001010000&toDate=201107310000";
 	
 	@RequestMapping("/")
 	public String homePage() {
 		ResponseEntity<TwitterTweetsSearchAPIResponse> searchResponse = getTweets();
 		log.info("Parsing Response");
 		List<Tweet> tweets = searchResponse.getBody().getResults();
+		try{
+			mongodb.insert(tweets);
+		}catch (MongoBulkWriteException mbwe) {
+			log.error(mbwe.getMessage());
+		}
 		StringBuilder  sb = new StringBuilder();
 		tweets.stream().forEach(x -> sb.append(x.getText() + "\n"));
 		log.info("Returning Response");
-		return sb.toString();
+		return "hello";	
 //		ResponseEntity<User> user = twitterRestTemplate.exchange(URL, HttpMethod.GET, entity , User.class);
 //		return user.getBody();
 //		return "Hello Twitter";
@@ -46,8 +56,9 @@ public class TwitterArchiveController {
 
 	@RequestMapping("/hello")
 	public String helloPage(ModelMap model) {
-		ResponseEntity<TwitterTweetsSearchAPIResponse> searchResponse = getTweets();
-		model.addAttribute("tweets", searchResponse.getBody().getResults());
+		//get from db 
+		List<Tweet> tweetsFromDb = mongodb.findAll();
+		model.addAttribute("tweets", tweetsFromDb);
 		return "hello";
 	}
 	
