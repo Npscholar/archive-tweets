@@ -44,6 +44,7 @@ public class ArchiveTweetsApplication {
     public OAuth2RestTemplate twitterRestTemplate(OAuth2ClientContext clientContext) {
         OAuth2RestTemplate template = new OAuth2RestTemplate(twitter(), clientContext);
         template.setAccessTokenProvider(new ClientCredentialsAccessTokenProvider());
+        template.setErrorHandler(new TwitterResponseErrorHandler());
         return template;
     }
     

@@ -17,6 +17,7 @@ import lombok.Data;
 @Data
 public class TwitterTweetsSearchAPIResponse {
 	private List<Tweet> results;
+	private String next;
 	private RequestParameters requestParameters;
 	
 

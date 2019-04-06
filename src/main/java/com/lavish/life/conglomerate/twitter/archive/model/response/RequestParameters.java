@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class RequestParameters {
 		private Integer maxResults;
-		private Date fromDate;
-		private Date toDate;
+		private long fromDate;
+		private long toDate;
 
 }
